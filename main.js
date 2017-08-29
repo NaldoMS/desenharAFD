@@ -73,7 +73,7 @@ $(document).ready(function() {
     $('#desenhar').click(function() {
         desenharEstados();
 
-        var canvas2 = document.getElementById('loop');
+       /* var canvas2 = document.getElementById('loop');
         if (canvas2.getContext){
             var ctx = canvas2.getContext('2d');
             ctx.beginPath();
@@ -102,7 +102,7 @@ $(document).ready(function() {
             ctx2.quadraticCurveTo(125,100,125,62.5);
             ctx2.quadraticCurveTo(125,25,75,25);
             ctx2.stroke();
-        }
+        }*/
     });
 
     $('#desenhar').click();
