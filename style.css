@@ -1,6 +1,20 @@
 #desenhos{
 }
 
+#bola{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-color: #1a1a1a;
+}
+
 canvas{
     float: none;
+    position: absolute;
+}
+
+canvas.final{
+    border: 1px solid #000000;
+    border-radius: 30px;
+    padding: 5px;
 }

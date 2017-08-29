@@ -9,19 +9,20 @@
 </head>
 <body>
     <div>
-        <span>Alfabeto:</span><input id="alfabeto" name="alfabeto" type="text">
-        <span>Quantidade de estados:</span><input id="qtd_estado" name="qtd_estados" type="text">
-        <span>Estado Inicial:</span><input id="estadoI" name="estadoI" type="text">
-        <span>Estados Finais:</span><input id="estadoF" name="estadoF" type="text">
-        <span>Transições:</span><input id="transicoes" name="transicoes" type="text">
-        <span>Entrada:</span><input id="entrada" name="entrada" type="text">
+        <form method="get">
+            <span style="display: none;">Quantidade de estados:</span><input id="qtd_estado" name="qtd_estados" type="hidden">
+            <span style="display: none;">Estado Inicial:</span><input id="estadoI" name="estadoI" type="hidden">
+            <span style="display: none;">Estados Finais:</span><input id="estadoF" name="estadoF" type="hidden">
+            <span style="display: none;">Transições:</span><input id="transicoes" name="transicoes" type="hidden">
 
-        <button id="desenhar">Enviar</button>
+            <a style="display: none;" id="desenhar">Enviar</a>
+        </form>
     </div>
 
-        <div id="desenhos">
-            <canvas class="icon" iid="icon1" id="icon1" width="50" height="50"></canvas>
-        </div>
-
+    <div id="desenhos">
+        <canvas class="icon" iid="icon1" id="icon1" width="50" height="50"></canvas>
+        <canvas id="loop" width="150" height="200"></canvas>
+        <canvas id="curvas" width="150" height="150"></canvas>
+    </div>
 </body>
 </html>
