@@ -70,8 +70,25 @@ $(document).ready(function() {
     $("#estadoF").val(urlMaster[3]);
     $("#transicoes").val(urlMaster[4]);
 
+    var tranNaVIrgula = urlMaster[4].split(",");
+    var tranNaBa = [];
+
+    for(var  i = 0; i < tranNaVIrgula.length; i++){
+        tranNaBa[i] = tranNaVIrgula[i].split("/");
+    }
+    alert(tranNaBa[0][3]);
+
+
     $('#desenhar').click(function() {
         desenharEstados();
+
+        var canvas = document.getElementById('reta');
+        var context = canvas.getContext('2d');
+
+        context.beginPath();
+        context.moveTo(60, 30);
+        context.lineTo(60, 330);
+        context.stroke();
 
        /* var canvas2 = document.getElementById('loop');
         if (canvas2.getContext){
