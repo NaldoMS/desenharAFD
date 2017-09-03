@@ -65,6 +65,8 @@ function desenharEstados() {
 $(document).ready(function() {
     var url = window.location.href;
     var urlMaster = url.split('|');
+    var i = 1;
+    var j = 0;
     $("#qtd_estado").val(urlMaster[1]);
     $("#estadoI").val(urlMaster[2]);
     $("#estadoF").val(urlMaster[3]);
@@ -73,22 +75,38 @@ $(document).ready(function() {
     var tranNaVIrgula = urlMaster[4].split(",");
     var tranNaBa = [];
 
-    for(var  i = 0; i < tranNaVIrgula.length; i++){
+    for(var  i = 0; i < tranNaVIrgula.length; i++) {
         tranNaBa[i] = tranNaVIrgula[i].split("/");
     }
-    alert(tranNaBa[0][3]);
 
 
     $('#desenhar').click(function() {
         desenharEstados();
 
-        var canvas = document.getElementById('reta');
-        var context = canvas.getContext('2d');
+        for(var i = 1; i < tranNaBa.length; i++){
+            $("#desenhos").append("<canvas class='reta' iid='reta"+i+"'  id='reta"+i+"' width='300' height='300'></canvas>");
+        }
 
-        context.beginPath();
-        context.moveTo(60, 30);
-        context.lineTo(60, 330);
-        context.stroke();
+        i = -1;
+        j = 0;
+        $('.reta').each(function() {
+            j++;
+            var x = $("#icon"+j).offset().left;
+            var y = $("#icon"+j).offset().top;
+            alert(x);
+            alert(y);
+            var canvas = document.getElementById($(this).attr('iid'));
+            var context = canvas.getContext('2d');
+
+            context.beginPath();
+            context.moveTo(60, 30);
+            context.lineTo(60, 330);
+            context.stroke();
+
+            i++;
+            $('#reta'+i).css("top", y+"px");
+            $('#reta'+i).css("left", x+"px");
+        });
 
        /* var canvas2 = document.getElementById('loop');
         if (canvas2.getContext){
