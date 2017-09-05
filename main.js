@@ -130,6 +130,7 @@ $(document).ready(function() {
                 $('#dog'+i).attr('x2', xFinal);
                 $('#dog'+i).attr('y2', yFinal);
 
+                $("#desenhos").append("<p style='margin-left: "+xFinal/2+"; margin-top: '>"+tranNaBa[i][1]+"</p>");
             }
         }
     });
