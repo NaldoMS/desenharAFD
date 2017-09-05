@@ -67,6 +67,7 @@ $(document).ready(function() {
     var urlMaster = url.split('|');
     var i = 1;
     var j = 0;
+    var alfabetoM = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     $("#qtd_estado").val(urlMaster[1]);
     $("#estadoI").val(urlMaster[2]);
     $("#estadoF").val(urlMaster[3]);
@@ -82,62 +83,56 @@ $(document).ready(function() {
 
     $('#desenhar').click(function() {
         desenharEstados();
-
-        for(var i = 1; i < tranNaBa.length; i++){
-            $("#desenhos").append("<canvas class='reta' iid='reta"+i+"'  id='reta"+i+"' width='300' height='300'></canvas>");
-        }
-
-        i = -1;
-        j = 0;
-        $('.reta').each(function() {
-            j++;
-            var x = $("#icon"+j).offset().left;
-            var y = $("#icon"+j).offset().top;
-            alert(x);
-            alert(y);
-            var canvas = document.getElementById($(this).attr('iid'));
+        for(var i = 0; i < tranNaBa.length; i++){
+            var j = 0;
+            var xInicial = $("#icon"+alfabetoM.indexOf(tranNaBa[i][0])).offset().left;
+            var yInicial = $("#icon"+alfabetoM.indexOf(tranNaBa[i][0])).offset().top;
+            var xFinal = $("#icon"+alfabetoM.indexOf(tranNaBa[i][2])).offset().left;
+            var yFinal = $("#icon"+alfabetoM.indexOf(tranNaBa[i][2])).offset().top;
+            var canvas = document.getElementById($('#reta'+i).attr('iid'));
             var context = canvas.getContext('2d');
 
-            context.beginPath();
-            context.moveTo(60, 30);
-            context.lineTo(60, 330);
-            context.stroke();
+            if (tranNaBa[i][0] == tranNaBa[i][2]) {
+                var canvas2 = document.getElementById('loop');
+                if (canvas2.getContext){
+                    var ctx = canvas2.getContext('2d');
+                    ctx.beginPath();
+                    var x              = 125;               // coordenada x
+                    var y              = 25;               // coordenada y
+                    var radius         = 20;                    // Raio do Arco
+                    var startAngle     = 0.5;                     // Ponto inicial no círculo
+                    var endAngle       = Math.PI+(Math.PI*2)/2; // Ponto final no círculo
+                    var anticlockwise  = false; // horário ou anti-horário
 
-            i++;
-            $('#reta'+i).css("top", y+"px");
-            $('#reta'+i).css("left", x+"px");
-        });
+                    ctx.arc(xInicial-20, yInicial+20, radius, startAngle, endAngle, anticlockwise);
+                    ctx.stroke();
+                }
+            }
+            else {
+                var qtd_estados = $('#qtd_estado').val();
+                var raio = 180;
+                var centroX = $(window).width() / 2;
+                var centroY = $(window).height() / 2;
 
-       /* var canvas2 = document.getElementById('loop');
-        if (canvas2.getContext){
-            var ctx = canvas2.getContext('2d');
-            ctx.beginPath();
-            var x              = 125;               // coordenada x
-            var y              = 25;               // coordenada y
-            var radius         = 20;                    // Raio do Arco
-            var startAngle     = 0.5;                     // Ponto inicial no círculo
-            var endAngle       = Math.PI+(Math.PI*2)/2; // Ponto final no círculo
-            var anticlockwise  = false; // horário ou anti-horário
+                var cosseno = Math.cos(toRadians(360 * alfabetoM.indexOf(tranNaBa[i][0]) / qtd_estados));
+                var seno = Math.sin(toRadians(360 * alfabetoM.indexOf(tranNaBa[i][0]) / qtd_estados));
 
-            ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
-            ctx.stroke();
+                var xInicial = (cosseno * raio) + centroX;
+                var yInicial = (seno * raio) + centroY;
+
+                var cosseno = Math.cos(toRadians(360 * alfabetoM.indexOf(tranNaBa[i][2]) / qtd_estados));
+                var seno = Math.sin(toRadians(360 * alfabetoM.indexOf(tranNaBa[i][2]) / qtd_estados));
+
+                var xFinal = (cosseno * raio) + centroX;
+                var yFinal = (seno * raio) + centroY;
+
+                $('#dog'+i).attr('x1', xInicial);
+                $('#dog'+i).attr('y1', yInicial);
+                $('#dog'+i).attr('x2', xFinal);
+                $('#dog'+i).attr('y2', yFinal);
+                $("#box").append("<line id='dog"+(j+1)+"' style='stroke:rgb(255,0,0);stroke-width:2' />");
+            }
         }
-
-        var canvas3 = document.getElementById('curvas');
-        if (canvas3.getContext) {
-            var ctx2 = canvas3.getContext('2d');
-
-            // Quadratric curves example
-            ctx2.beginPath();
-            ctx2.moveTo(75,25);
-            ctx2.quadraticCurveTo(25,25,25,62.5);
-            ctx2.quadraticCurveTo(25,100,50,100);
-            ctx2.quadraticCurveTo(50,120,30,125);
-            ctx2.quadraticCurveTo(60,120,65,100);
-            ctx2.quadraticCurveTo(125,100,125,62.5);
-            ctx2.quadraticCurveTo(125,25,75,25);
-            ctx2.stroke();
-        }*/
     });
 
     $('#desenhar').click();

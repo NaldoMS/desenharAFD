@@ -15,3 +15,11 @@ canvas.final{
     border-radius: 30px;
     padding: 5px;
 }
+
+.linha-vertical {
+    height: 500px;/*Altura da linha*/
+    border-left: 2px solid;/* Adiciona borda esquerda na div como ser fosse uma linha.*/
+    -ms-transform: rotate(7deg); /* IE 9 */
+    -webkit-transform: rotate(10deg); /* Chrome, Safari, Opera */
+    transform: rotate(10deg);
+}
