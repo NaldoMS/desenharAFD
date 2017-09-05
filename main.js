@@ -76,21 +76,19 @@ $(document).ready(function() {
     var tranNaVIrgula = urlMaster[4].split(",");
     var tranNaBa = [];
 
-    for(var  i = 0; i < tranNaVIrgula.length; i++) {
-        tranNaBa[i] = tranNaVIrgula[i].split("/");
+    for(var  i = 1; i <= tranNaVIrgula.length; i++) {
+        tranNaBa[i] = tranNaVIrgula[i-1].split("/");
     }
 
 
-    $('#desenhar').click(function() {
+    $('#desenhar').on("click", function() {
         desenharEstados();
-        for(var i = 0; i < tranNaBa.length; i++){
+        for(var i = 1; i < tranNaBa.length; i++){
             var j = 0;
             var xInicial = $("#icon"+alfabetoM.indexOf(tranNaBa[i][0])).offset().left;
             var yInicial = $("#icon"+alfabetoM.indexOf(tranNaBa[i][0])).offset().top;
             var xFinal = $("#icon"+alfabetoM.indexOf(tranNaBa[i][2])).offset().left;
             var yFinal = $("#icon"+alfabetoM.indexOf(tranNaBa[i][2])).offset().top;
-            var canvas = document.getElementById($('#reta'+i).attr('iid'));
-            var context = canvas.getContext('2d');
 
             if (tranNaBa[i][0] == tranNaBa[i][2]) {
                 var canvas2 = document.getElementById('loop');
@@ -109,6 +107,7 @@ $(document).ready(function() {
                 }
             }
             else {
+                $("#box").append("<line id='dog"+(i)+"' style='stroke:rgb(255,0,0);stroke-width:2' />");
                 var qtd_estados = $('#qtd_estado').val();
                 var raio = 180;
                 var centroX = $(window).width() / 2;
@@ -130,7 +129,7 @@ $(document).ready(function() {
                 $('#dog'+i).attr('y1', yInicial);
                 $('#dog'+i).attr('x2', xFinal);
                 $('#dog'+i).attr('y2', yFinal);
-                $("#box").append("<line id='dog"+(j+1)+"' style='stroke:rgb(255,0,0);stroke-width:2' />");
+
             }
         }
     });
